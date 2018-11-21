@@ -5,7 +5,7 @@ const url = require('url');
 function asyncTest() {
   let fireMeWhenServerReponses;
 
-  function wait() {
+  function waitTillServerRespondes() {
     return new Promise(resolve => {
       fireMeWhenServerReponses = resolve;
     });
@@ -51,7 +51,7 @@ function asyncTest() {
 
         cart.AddToCartTrigger$++;
 
-        await wait(100);
+        await waitTillServerRespondes();
 
         if (TopRightCart.ItemsInCart !== 1) {
           reject(
@@ -62,11 +62,11 @@ function asyncTest() {
         const increaseBy = Math.floor(Math.random() * 20);
         obj.BlendingProvider_0.Content.BlendingProvider_0.Sections.Main.BlendingProvider_1.KeptViews[0].OriginalResponse.Showroom_0.CurrentPage.ShoppingCart_0.Quantity$ += increaseBy;
 
-        await wait(100);
+        await waitTillServerRespondes();
 
         cart.AddToCartTrigger$++;
 
-        await wait(100);
+        await waitTillServerRespondes();
 
         if (TopRightCart.ItemsInCart !== increaseBy + 2) {
           reject(
